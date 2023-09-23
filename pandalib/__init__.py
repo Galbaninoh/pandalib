@@ -24,6 +24,31 @@ class pandalib:
         r = self.session.get(url, headers=header)
         return r.json()
     
+    def get_item_sku(self, itemurl:str):
+        body = {"urlList": [itemurl]}
+        headers = {
+            "accept": "application/json, text/plain, */*",
+            "content-type": "application/json",
+            "sec-ch-ua": "\"Chromium\";v=\"116\", \"Not)A;Brand\";v=\"24\", \"Opera\";v=\"103\"",
+            "Referer": "https://qc.pandabuy.com/search?k=414ea3da4c1e45a6ef7f3585dbe92faf",
+            "Referrer-Policy": "strict-origin-when-cross-origin"
+        }
+        url = f"https://qc.pandabuy.com/gateway/order/getItemSkuListByUrl"
+        r = self.session.post(url, json=body, headers=headers)
+        return r.json()
+
+    def get_qc_photos(self, itemurl:str, sku:str):
+        url = f"https://www.pandabuy.com/gateway/product/itemGet?url={itemurl}&userId={self.userid}"
+        header = {"Accept" : "*/*", "Authorization" : "Bearer " + self.auth,"Currency" : "USD", "Referer": "https://qc.pandabuy.com/qc?"}
+        r_item = self.session.get(url, headers=header)
+        r_item_response = r_item.json()
+        goods_id = r_item_response["data"]["item"]["num_iid"]
+        url = "https://qc.pandabuy.com/gateway/order/getItemPictureBySku"
+        body = {"goodsId": goods_id, "skuId": sku, "pictureType": "0"}
+        r = self.session.post(url, json=body, headers=header)
+        print(r.status_code)
+        return r.json()
+
     def get_cart(self):
         url = f"https://www.pandabuy.com/gateway/user/cart/allList"
         header = {"Accept" : "*/*", "Authorization" : "Bearer " + self.auth,"Currency" : "USD"}
