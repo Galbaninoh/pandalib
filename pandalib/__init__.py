@@ -24,7 +24,7 @@ class pandalib:
         r = self.session.get(url, headers=header)
         return r.json()
     
-    def get_item_sku(self, itemurl:str):
+    def get_item_skus(self, itemurl:str):
         body = {"urlList": [itemurl]}
         headers = {
             "accept": "application/json, text/plain, */*",
@@ -46,7 +46,6 @@ class pandalib:
         url = "https://qc.pandabuy.com/gateway/order/getItemPictureBySku"
         body = {"goodsId": goods_id, "skuId": sku, "pictureType": "0"}
         r = self.session.post(url, json=body, headers=header)
-        print(r.status_code)
         return r.json()
 
     def get_cart(self):
