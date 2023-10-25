@@ -47,7 +47,7 @@ class pandalib:
         body = {"goodsId": goods_id, "skuId": sku, "pictureType": "0"}
         r = self.session.post(url, json=body, headers=header)
         return r.json()
-
+    
     def get_cart(self):
         url = f"https://www.pandabuy.com/gateway/user/cart/allList"
         header = {"Accept" : "*/*", "Authorization" : "Bearer " + self.auth,"Currency" : "USD"}
