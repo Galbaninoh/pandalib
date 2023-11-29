@@ -5,7 +5,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name='pandalib',
-    version='0.2.2',
+    version='0.2.3',
     packages=['pandalib'],
     url='https://github.com/Galbaninoh/pandalib',
     author='galbaninoh',

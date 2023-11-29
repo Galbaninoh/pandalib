@@ -84,7 +84,7 @@ class pandautilities:
             "needInsurance": True
         } 
         url = f"https://www.pandabuy.com/gateway/logistics/estimate"
-        header = {"Accept" : "*/*", "Authorization" : "Bearer " + self.auth}
+        header = {"Accept" : "*/*", "Authorization" : "Bearer " + self.auth,"Lang" : "en"}
         r = self.session.post(url, headers=header, json=body)
         return r.json()
 
